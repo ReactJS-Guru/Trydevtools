@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>TryDevTools — Every developer tool, in your browser</title>
+<meta name="description" content="150+ fast, privacy-first developer tools: JSON, text, encoding, regex, color, time and more. Runs 100% in your browser."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css?v=16"/>
+<style>
+  :root{--bg:#0d0f14;--bg-1:#12151c;--bg-2:#181c26;--bg-3:#1e2330;--bg-hover:#232a38;--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);--ink:#f0f2f8;--ink-2:#9ba3b8;--ink-3:#5d6882;--accent:#6366f1;--accent-hi:#818cf8;--accent-soft:rgba(99,102,241,0.12);--accent-glow:rgba(99,102,241,0.25);--ok:#34d399;--err:#f87171;--font:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:8px;--r-lg:14px;--r-xl:20px;--shadow-lg:0 12px 48px rgba(0,0,0,.6);--glow:0 0 0 1px var(--accent-glow),0 4px 24px var(--accent-glow)}
+  html[data-theme="light"]{--bg:#f5f6fa;--bg-1:#fff;--bg-2:#f0f1f7;--bg-3:#e8eaf3;--bg-hover:#eceef8;--line:rgba(0,0,0,0.07);--line-strong:rgba(0,0,0,0.14);--ink:#111827;--ink-2:#4b5568;--ink-3:#9ca3af;--accent:#4f46e5;--accent-hi:#6366f1;--accent-soft:rgba(79,70,229,0.08);--accent-glow:rgba(79,70,229,0.2)}
+  *,*::before,*::after{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;cursor:pointer;border:none;background:none}
+  .logo{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .logo-text{display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1}
+  .logo-text .brand{display:block;font-size:13.5px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+  .logo-text .tagline{display:block;font-size:8.5px;font-weight:500;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono)}
+  .grad-text{background:linear-gradient(135deg,#818cf8 0%,#a78bfa 50%,#f472b6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;display:inline}
+  html[data-theme="light"] .grad-text{background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#db2777 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .site-header{position:sticky;top:0;z-index:100;height:64px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .site-header-inner{display:flex;align-items:center;gap:20px;height:100%}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);font-family:var(--mono);white-space:nowrap}
+  .chip.accent{background:var(--accent-soft);border-color:rgba(99,102,241,.25);color:var(--accent-hi)}
+</style>
+<script>
+  try {
+    const t = localStorage.getItem("dth_theme"); if (t) document.documentElement.dataset.theme = t;
+    const d = localStorage.getItem("dth_density"); if (d) document.documentElement.dataset.density = d;
+  } catch(e){}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script>/*EDITMODE-BEGIN*/ window.__TWEAKS__ = { "accent": "indigo", "theme": "dark", "density": "comfortable" };/*EDITMODE-END*/</script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js?v=16"></script>
+<script type="text/babel" src="components.jsx?v=16"></script>
+<script type="text/babel" src="tools/json.jsx?v=16"></script>
+<script type="text/babel" src="tools/text.jsx?v=16"></script>
+<script type="text/babel" src="tools/markdown.jsx?v=16"></script>
+<script type="text/babel" src="tools/encoding.jsx?v=16"></script>
+<script type="text/babel" src="tools/converters.jsx?v=16"></script>
+<script type="text/babel" src="tools/formatters.jsx?v=16"></script>
+<script type="text/babel" src="tools/utilities.jsx?v=16"></script>
+<script type="text/babel" src="tools/color.jsx?v=16"></script>
+<script type="text/babel" src="tools/time.jsx?v=16"></script>
+<script type="text/babel" src="tools/regex.jsx?v=16"></script>
+<script type="text/babel" src="tools/images.jsx?v=16"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useRef } = React;
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+function Hero() {
+  const [q, setQ] = useState("");
+  const [showDrop, setShowDrop] = useState(false);
+  const inputRef = useRef(null);
+
+  const results = useMemo(() => {
+    if (!q.trim()) return [];
+    const n = q.toLowerCase();
+    return window.TOOLS.filter(t =>
+      (t.name + " " + t.desc + " " + t.category + " " + t.slug).toLowerCase().includes(n)
+    ).slice(0, 8);
+  }, [q]);
+
+  useEffect(() => setShowDrop(q.trim().length > 0), [q]);
+
+  return (
+    <section className="hero">
+      <div className="container">
+        <div style={{maxWidth:780, margin:"0 auto", textAlign:"center"}}>
+
+          <div className="hero-eyebrow">
+            <span className="chip accent"><Icon.Zap style={{color:"var(--accent-hi)"}}/> 150+ tools</span>
+            <span className="chip" style={{gap:6}}>
+              <span style={{width:7,height:7,borderRadius:"50%",background:"var(--ok)",display:"inline-block"}}/>
+              100% private · runs locally
+            </span>
+          </div>
+
+          <h1 className="h1" style={{marginBottom:20}}>
+            Every tool a dev needs,<br/>
+            <span className="grad-text">right in your browser</span>
+          </h1>
+          <p style={{fontSize:18, color:"var(--ink-2)", maxWidth:"54ch", margin:"0 auto 40px", lineHeight:1.65}}>
+            Format JSON. Decode JWTs. Convert timestamps. Generate UUIDs. Test regex. 150+ utilities that run locally — no sign-up, no uploads, no nonsense.
+          </p>
+
+          {/* Search */}
+          <div style={{position:"relative", maxWidth:560, margin:"0 auto"}}>
+            <div className="search-box" style={{padding:"14px 18px", borderRadius:14, border: showDrop ? "1px solid var(--accent)" : "1px solid var(--line-strong)"}}>
+              <Icon.Search style={{color:"var(--ink-3)", flexShrink:0}}/>
+              <input ref={inputRef} value={q} onChange={e => setQ(e.target.value)}
+                placeholder="Search — 'json formatter', 'base64', 'uuid', 'regex'…"
+                style={{fontSize:15}}
+                onKeyDown={e => {
+                  if (e.key === "Escape") setQ("");
+                  if (e.key === "Enter" && results[0]) window.location.href = toolUrl(results[0]);
+                }}/>
+              {q ? <button onClick={() => setQ("")} style={{cursor:"pointer",color:"var(--ink-3)",display:"flex"}}><Icon.X/></button>
+                 : <span className="kbd">⌘K</span>}
+            </div>
+            {showDrop && (
+              <div className="card" style={{position:"absolute",top:62,left:0,right:0,zIndex:20,padding:6,boxShadow:"0 20px 60px rgba(0,0,0,.5)",textAlign:"left",borderRadius:"var(--r-xl)"}}>
+                {results.length === 0
+                  ? <div style={{padding:"20px 16px",color:"var(--ink-3)",fontSize:13}}>No tools match "<span style={{color:"var(--ink)"}}>{q}</span>"</div>
+                  : results.map(t => {
+                    const cat = window.CATEGORIES.find(c => c.slug === t.category);
+                    return (
+                      <a key={t.slug} href={toolUrl(t)} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 12px",borderRadius:8,transition:"background 100ms"}}
+                        onMouseOver={e=>e.currentTarget.style.background="var(--bg-hover)"}
+                        onMouseOut={e=>e.currentTarget.style.background="transparent"}>
+                        <span style={{fontFamily:"var(--mono)",fontSize:11,color:"var(--ink-3)",width:60}}>/{cat?.slug}</span>
+                        <span style={{fontFamily:"var(--mono)",fontSize:13,color:"var(--ink)",flex:1}}>{t.name}</span>
+                        {window.LIVE_TOOLS?.[t.slug] && <span style={{width:6,height:6,background:"var(--ok)",borderRadius:"50%"}}/>}
+                        <span style={{fontSize:12,color:"var(--ink-3)",maxWidth:"38%",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{t.desc}</span>
+                      </a>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+
+          {/* Popular chips */}
+          <div style={{display:"flex",flexWrap:"wrap",gap:8,justifyContent:"center",marginTop:24}}>
+            <span style={{fontSize:12,color:"var(--ink-3)",fontFamily:"var(--mono)",alignSelf:"center"}}>popular:</span>
+            {window.TOOLS.filter(t => t.popular).slice(0, 7).map(t => (
+              <a key={t.slug} href={toolUrl(t)} className="chip"
+                style={{transition:"all 120ms",cursor:"pointer"}}
+                onMouseOver={e=>{e.currentTarget.style.borderColor="var(--accent)";e.currentTarget.style.color="var(--accent-hi)";}}
+                onMouseOut={e=>{e.currentTarget.style.borderColor="";e.currentTarget.style.color="";}}>
+                {t.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Categories ───────────────────────────────────────────────────────── */
+function CategoriesSection() {
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>browse by category</div>
+            <h2 className="h2">{window.CATEGORIES.length} categories of tools</h2>
+          </div>
+        </div>
+        <div className="grid-4">
+          {window.CATEGORIES.map(c => <CategoryCard key={c.slug} cat={c}/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Popular ──────────────────────────────────────────────────────────── */
+function PopularSection() {
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>most used</div>
+            <h2 className="h2">Popular tools</h2>
+          </div>
+        </div>
+        <div className="grid-3">
+          {window.TOOLS.filter(t => t.popular).map(t => <ToolCard key={t.slug} tool={t} showCategory/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Recents ──────────────────────────────────────────────────────────── */
+function RecentsSection() {
+  const [recents, setRecents] = useState([]);
+  useEffect(() => {
+    try {
+      const r = JSON.parse(localStorage.getItem("dth_recents") || "[]");
+      setRecents(r.slice(0,6).map(s => window.TOOLS.find(t=>t.slug===s)).filter(Boolean));
+    } catch {}
+  }, []);
+  if (!recents.length) return null;
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>continue working</div>
+            <h2 className="h2">Recently used</h2>
+          </div>
+          <button className="btn btn-ghost btn-sm" onClick={()=>{localStorage.removeItem("dth_recents");location.reload();}}>Clear history</button>
+        </div>
+        <div className="grid-3">
+          {recents.map(t => <ToolCard key={t.slug} tool={t} showCategory/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Full catalog ─────────────────────────────────────────────────────── */
+function CatalogSection() {
+  const [active, setActive] = useState("all");
+  const [view, setView] = useState("grid");
+  const list = active === "all" ? window.TOOLS : window.TOOLS.filter(t => t.category === active);
+
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>complete catalog</div>
+            <h2 className="h2">150+ developer tools</h2>
+          </div>
+          <div style={{display:"flex",gap:8,alignItems:"center"}}>
+            <button className="icon-btn" onClick={()=>setView("grid")} style={{background:view==="grid"?"var(--accent-soft)":"",borderColor:view==="grid"?"var(--accent)":""}}><Icon.Grid/></button>
+            <button className="icon-btn" onClick={()=>setView("list")} style={{background:view==="list"?"var(--accent-soft)":"",borderColor:view==="list"?"var(--accent)":""}}><Icon.List/></button>
+          </div>
+        </div>
+
+        {/* Filter tabs */}
+        <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:24,paddingBottom:20,borderBottom:"1px solid var(--line)"}}>
+          <button className={`chip ${active==="all"?"accent":""}`} onClick={()=>setActive("all")} style={{cursor:"pointer"}}>
+            All <span style={{opacity:.6,marginLeft:3}}>{window.TOOLS.length}</span>
+          </button>
+          {window.CATEGORIES.map(c => (
+            <button key={c.slug} className={`chip ${active===c.slug?"accent":""}`} onClick={()=>setActive(c.slug)} style={{cursor:"pointer"}}>
+              {c.name} <span style={{opacity:.6,marginLeft:3}}>{window.TOOLS.filter(t=>t.category===c.slug).length}</span>
+            </button>
+          ))}
+        </div>
+
+        {view === "grid" ? (
+          <div className="grid-auto">
+            {list.map(t => <ToolCard key={t.slug} tool={t} showCategory={active==="all"}/>)}
+          </div>
+        ) : (
+          <div className="card" style={{padding:0,overflow:"hidden"}}>
+            {list.map((t, i) => {
+              const cat = window.CATEGORIES.find(c=>c.slug===t.category);
+              const isLive = !!window.LIVE_TOOLS?.[t.slug];
+              return (
+                <a key={t.slug} href={toolUrl(t)} className="catalog-list-row"
+                  style={{padding:"12px 20px",borderBottom:i<list.length-1?"1px solid var(--line)":"none",display:"flex",alignItems:"center",gap:10}}>
+                  <span style={{width:7,height:7,borderRadius:"50%",flexShrink:0,background:isLive?"var(--ok)":"var(--line-strong)"}}/>
+                  <span className="t-name">{t.name}</span>
+                  {active==="all" && <span style={{fontSize:11,fontFamily:"var(--mono)",color:"var(--ink-3)",width:88}}>/{cat?.slug}</span>}
+                  <span className="t-desc">{t.desc}</span>
+                  {t.popular && <Icon.Star style={{color:"var(--accent-hi)",flexShrink:0}}/>}
+                </a>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── Why section ──────────────────────────────────────────────────────── */
+function WhySection() {
+  const points = [
+    { icon:"🔒", title:"100% Private", body:"Every computation happens in your browser. Your data never touches a server — paste tokens, secrets and internal URLs safely." },
+    { icon:"⚡", title:"Instant Results", body:"No round-trips, no loading spinners. Results appear as you type. Most tools process multi-MB payloads in milliseconds." },
+    { icon:"⌨️", title:"Keyboard-first", body:"⌘K to search any tool from anywhere. Navigate results with arrow keys, press Enter to open. Built for speed." },
+    { icon:"🔗", title:"Shareable URLs", body:"Input is encoded in the URL hash. Copy the URL, share with a teammate — they see the same pre-filled tool instantly." },
+  ];
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>why trydevtools</div>
+            <h2 className="h2">Built for how devs actually work</h2>
+          </div>
+        </div>
+        <div className="grid-4">
+          {points.map(p => (
+            <div key={p.title} className="card" style={{padding:"28px 24px 32px"}}>
+              <div style={{fontSize:32,marginBottom:16}}>{p.icon}</div>
+              <div style={{fontSize:15,fontWeight:700,letterSpacing:"-0.01em",marginBottom:10,color:"var(--ink)"}}>{p.title}</div>
+              <div style={{fontSize:13.5,color:"var(--ink-2)",lineHeight:1.65}}>{p.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── FAQ ──────────────────────────────────────────────────────────────── */
+function FAQSection() {
+  const faqs = [
+    { q: "Is TryDevTools free to use?", a: "Yes — TryDevTools is completely free. All 150+ tools are available without any account, subscription, or payment. There are no hidden fees or premium tiers." },
+    { q: "Is my data safe? Does anything get uploaded?", a: "Your data never leaves your browser. Every tool runs entirely in JavaScript on your device — no servers process your input. You can verify this yourself by opening your browser's Network tab while using any tool and watching for zero outbound requests." },
+    { q: "Do I need to create an account?", a: "No account is required. Simply open any tool and start using it. Recently used tools are saved locally in your browser for convenience." },
+    { q: "Can I use TryDevTools offline?", a: "Once the page has loaded, most tools work without an internet connection since all processing happens locally. The initial page load requires connectivity to load the application." },
+    { q: "How often are new tools added?", a: "We ship new tools regularly based on developer feedback. If you're missing a tool you use often, reach out via our contact page and we'll prioritize it." },
+    { q: "Can I use these tools for work with confidential data?", a: "Yes. Because nothing leaves your machine, TryDevTools is safe to use with API keys, auth tokens, internal URLs, PII, or any sensitive payload. Your data stays on your device at all times." },
+    { q: "What browsers are supported?", a: "TryDevTools works in all modern browsers — Chrome, Firefox, Safari, and Edge. For the best experience, we recommend Chrome or Edge. Internet Explorer is not supported." },
+    { q: "Can I embed a tool in my own application?", a: "Yes. Each tool supports an embed mode — append ?embed=1 to any tool URL and it renders in a minimal iframe-friendly layout, suitable for embedding in dashboards or internal tools." },
+  ];
+
+  const [open, setOpen] = useState(0);
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{marginBottom:8}}>FAQ</div>
+            <h2 className="h2">Frequently asked questions</h2>
+          </div>
+        </div>
+        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:40, alignItems:"start"}}>
+          <div>
+            {faqs.slice(0, 4).map((f, i) => (
+              <FaqItem key={i} q={f.q} a={f.a} idx={i} openIdx={open} setOpen={setOpen}/>
+            ))}
+          </div>
+          <div>
+            {faqs.slice(4).map((f, i) => (
+              <FaqItem key={i+4} q={f.q} a={f.a} idx={i+4} openIdx={open} setOpen={setOpen}/>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FaqItem({ q, a, idx, openIdx, setOpen }) {
+  const isOpen = openIdx === idx;
+  return (
+    <div style={{borderBottom:"1px solid var(--line)", padding:"18px 0"}}>
+      <div onClick={() => setOpen(isOpen ? -1 : idx)}
+        style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,cursor:"pointer",userSelect:"none"}}>
+        <span style={{fontSize:15,fontWeight:600,color:"var(--ink)",lineHeight:1.4}}>{q}</span>
+        <span style={{color:"var(--ink-3)",transition:"transform 160ms",transform:isOpen?"rotate(90deg)":"rotate(0deg)",flexShrink:0}}>
+          <Icon.Chevron/>
+        </span>
+      </div>
+      {isOpen && (
+        <div style={{marginTop:10,fontSize:14,color:"var(--ink-2)",lineHeight:1.65,maxWidth:"56ch"}}>
+          {a}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── App ──────────────────────────────────────────────────────────────── */
+function App() {
+  return (
+    <AppShell active="home">
+      <Hero/>
+      <CategoriesSection/>
+      <PopularSection/>
+      <RecentsSection/>
+      <CatalogSection/>
+      <WhySection/>
+      <FAQSection/>
+    </AppShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>

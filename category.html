@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>JSON Tools — TryDevTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css?v=16"/>
+<style>
+  :root{--bg:#0d0f14;--bg-1:#12151c;--bg-2:#181c26;--bg-3:#1e2330;--bg-hover:#232a38;--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);--ink:#f0f2f8;--ink-2:#9ba3b8;--ink-3:#5d6882;--accent:#6366f1;--accent-hi:#818cf8;--accent-soft:rgba(99,102,241,0.12);--accent-glow:rgba(99,102,241,0.25);--ok:#34d399;--err:#f87171;--font:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:8px;--r-lg:14px;--r-xl:20px;--shadow-lg:0 12px 48px rgba(0,0,0,.6);--glow:0 0 0 1px var(--accent-glow),0 4px 24px var(--accent-glow)}
+  html[data-theme="light"]{--bg:#f5f6fa;--bg-1:#fff;--bg-2:#f0f1f7;--bg-3:#e8eaf3;--bg-hover:#eceef8;--line:rgba(0,0,0,0.07);--line-strong:rgba(0,0,0,0.14);--ink:#111827;--ink-2:#4b5568;--ink-3:#9ca3af;--accent:#4f46e5;--accent-hi:#6366f1;--accent-soft:rgba(79,70,229,0.08);--accent-glow:rgba(79,70,229,0.2)}
+  *,*::before,*::after{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;cursor:pointer;border:none;background:none}
+  .logo{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .logo-text{display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1}
+  .logo-text .brand{display:block;font-size:13.5px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+  .logo-text .tagline{display:block;font-size:8.5px;font-weight:500;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono)}
+  .site-header{position:sticky;top:0;z-index:100;height:64px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .site-header-inner{display:flex;align-items:center;gap:20px;height:100%}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);font-family:var(--mono);white-space:nowrap}
+  .chip.accent{background:var(--accent-soft);border-color:rgba(99,102,241,.25);color:var(--accent-hi)}
+</style>
+<script>
+  try {
+    const t = localStorage.getItem("dth_theme"); if (t) document.documentElement.dataset.theme = t;
+    const d = localStorage.getItem("dth_density"); if (d) document.documentElement.dataset.density = d;
+  } catch(e){}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js?v=16"></script>
+<script type="text/babel" src="components.jsx?v=16"></script>
+<script type="text/babel" src="tools/json.jsx?v=16"></script>
+<script type="text/babel" src="tools/text.jsx?v=16"></script>
+<script type="text/babel" src="tools/markdown.jsx?v=16"></script>
+<script type="text/babel" src="tools/encoding.jsx?v=16"></script>
+<script type="text/babel" src="tools/converters.jsx?v=16"></script>
+<script type="text/babel" src="tools/formatters.jsx?v=16"></script>
+<script type="text/babel" src="tools/utilities.jsx?v=16"></script>
+<script type="text/babel" src="tools/color.jsx?v=16"></script>
+<script type="text/babel" src="tools/time.jsx?v=16"></script>
+<script type="text/babel" src="tools/regex.jsx?v=16"></script>
+<script type="text/babel" src="tools/images.jsx?v=16"></script>
+
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+function FaqItem({ q, a, defaultOpen = false }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div style={{borderBottom:"1px solid var(--line)", padding:"18px 0"}}>
+      <div onClick={() => setOpen(o => !o)}
+        style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,cursor:"pointer",userSelect:"none"}}>
+        <span style={{fontSize:15,fontWeight:600,color:"var(--ink)",lineHeight:1.4}}>{q}</span>
+        <span style={{color:"var(--ink-3)",transition:"transform 160ms",transform:open?"rotate(90deg)":"none",flexShrink:0}}>
+          <Icon.Chevron/>
+        </span>
+      </div>
+      {open && <div style={{marginTop:10,fontSize:14,color:"var(--ink-2)",lineHeight:1.65}}>{a}</div>}
+    </div>
+  );
+}
+
+function CategoryPage() {
+  const params = new URLSearchParams(location.search);
+  const slug = params.get("c") || "json";
+  const cat = window.CATEGORIES.find(c => c.slug === slug) || window.CATEGORIES[0];
+  const tools = window.TOOLS.filter(t => t.category === cat.slug);
+  const liveTools = tools.filter(t => window.LIVE_TOOLS?.[t.slug]);
+  const popularTools = tools.filter(t => t.popular);
+
+  const [q, setQ] = useState("");
+  const [sort, setSort] = useState("popular");
+  const [view, setView] = useState("grid");
+
+  const filtered = useMemo(() => {
+    let list = [...tools];
+    if (q) list = list.filter(t => (t.name + " " + t.desc).toLowerCase().includes(q.toLowerCase()));
+    if (sort === "alpha") list.sort((a,b) => a.name.localeCompare(b.name));
+    else list.sort((a,b) => (b.popular?1:0) - (a.popular?1:0));
+    return list;
+  }, [q, sort, tools]);
+
+  const otherCats = window.CATEGORIES.filter(c => c.slug !== cat.slug);
+
+  // Category-specific FAQ
+  const faqs = {
+    json: [
+      { q:"What is JSON and why format it?", a:"JSON (JavaScript Object Notation) is the standard data-interchange format used by virtually every web API. Formatting it adds indentation and line breaks to make it human-readable — critical for debugging API responses." },
+      { q:"Is my JSON data safe here?", a:"Yes — 100%. All JSON processing happens in your browser using JavaScript's native JSON.parse(). Nothing is ever sent to a server. You can safely paste API tokens, internal data, or sensitive payloads." },
+      { q:"What's the difference between formatting and validating?", a:"Formatting just adds whitespace for readability. Validating checks whether the document conforms to the JSON specification — catching issues like trailing commas, single quotes, or unescaped characters." },
+    ],
+    text: [
+      { q:"What text operations are available?", a:"TryDevTools offers case conversion (camelCase, snake_case, etc.), word counting, line sorting, deduplication, find & replace, slug generation, whitespace cleanup, text reversal, and more." },
+      { q:"Are there limits on text size?", a:"Tools run in your browser, so limits are determined by your device's available memory. Practically speaking, most tools handle several MB of text without issues." },
+    ],
+    encoding: [
+      { q:"What is Base64 encoding?", a:"Base64 is a binary-to-text encoding scheme that represents binary data using printable ASCII characters. It's commonly used for embedding images in HTML, encoding data in JWTs, and transmitting binary data over text-based protocols." },
+      { q:"Can I decode JWTs safely here?", a:"Yes. JWT decoding is purely client-side — we decode the base64url-encoded header and payload locally. We never transmit your tokens anywhere." },
+    ],
+    default: [
+      { q:"Are all tools free?", a:"Yes — every tool on TryDevTools is completely free with no account required." },
+      { q:"Is my data private?", a:"Absolutely. All processing happens in your browser. Nothing is ever sent to a server." },
+      { q:"Can I use these tools offline?", a:"Once the page loads, most tools work without internet since all processing is local." },
+    ],
+  };
+  const faqList = faqs[slug] || faqs.default;
+
+  React.useEffect(() => {
+    document.title = `${cat.name} Tools — TryDevTools`;
+  }, [cat.name]);
+
+  return (
+    <AppShell active="categories">
+
+      {/* ── Hero Banner ─────────────────────────────────────────────── */}
+      <div style={{
+        borderBottom:"1px solid var(--line)",
+        background:`linear-gradient(135deg, color-mix(in srgb, ${cat.color} 8%, var(--bg)) 0%, var(--bg) 60%)`,
+        position:"relative", overflow:"hidden"
+      }}>
+        {/* Decorative glyph */}
+        <div style={{
+          position:"absolute", right:80, top:"50%", transform:"translateY(-50%)",
+          fontFamily:"var(--mono)", fontSize:160, fontWeight:700,
+          color:cat.color, opacity:.06, lineHeight:1, userSelect:"none", pointerEvents:"none"
+        }}>{cat.glyph}</div>
+
+        <div className="container" style={{padding:"40px 40px 36px"}}>
+          {/* Breadcrumbs */}
+          <div className="crumbs" style={{marginBottom:24}}>
+            <a href="index.html">home</a>
+            <span className="sep">/</span>
+            <a href="#">categories</a>
+            <span className="sep">/</span>
+            <span style={{color:"var(--ink)"}}>{cat.slug}</span>
+          </div>
+
+          <div style={{display:"flex", alignItems:"center", gap:20, marginBottom:16}}>
+            <div style={{
+              width:60, height:60, borderRadius:14, display:"flex",
+              alignItems:"center", justifyContent:"center",
+              background:cat.color, fontFamily:"var(--mono)", fontSize:20, fontWeight:700,
+              color:"rgba(0,0,0,.75)", flexShrink:0
+            }}>{cat.glyph}</div>
+            <div>
+              <div className="eyebrow" style={{marginBottom:6}}>/{cat.slug}</div>
+              <h1 style={{fontSize:36,fontWeight:800,letterSpacing:"-0.03em",margin:0,lineHeight:1.1}}>{cat.name} Tools</h1>
+            </div>
+          </div>
+
+          <p style={{fontSize:16,color:"var(--ink-2)",maxWidth:"64ch",margin:"0 0 24px",lineHeight:1.6}}>
+            {cat.description}
+          </p>
+
+          {/* Stats row */}
+          <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+            <span className="chip accent">{tools.length} tools</span>
+            <span className="chip ok" style={{background:"rgba(52,211,153,.08)",borderColor:"rgba(52,211,153,.2)",color:"var(--ok)"}}>
+              <span style={{width:6,height:6,borderRadius:"50%",background:"var(--ok)",display:"inline-block"}}/>
+              {liveTools.length} live demos
+            </span>
+            {popularTools.length > 0 && (
+              <span className="chip">
+                <Icon.Star style={{color:"var(--accent-hi)"}}/> {popularTools.length} popular
+              </span>
+            )}
+            <span className="chip">100% private</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="container" style={{paddingTop:40}}>
+
+        {/* ── Filter bar ────────────────────────────────────────────── */}
+        <div style={{
+          display:"flex", gap:12, alignItems:"center",
+          padding:"16px 20px",
+          background:"var(--bg-1)", border:"1px solid var(--line)",
+          borderRadius:"var(--r-lg)", marginBottom:28
+        }}>
+          <div className="search-box" style={{flex:1, maxWidth:380}}>
+            <Icon.Search style={{color:"var(--ink-3)"}}/>
+            <input placeholder={`Filter ${tools.length} ${cat.name.toLowerCase()} tools…`}
+              value={q} onChange={e => setQ(e.target.value)}
+              style={{fontSize:14}}/>
+            {q && <button onClick={()=>setQ("")} style={{color:"var(--ink-3)",display:"flex"}}><Icon.X/></button>}
+          </div>
+          <div style={{flex:1}}/>
+          <span style={{fontSize:12,color:"var(--ink-3)",fontFamily:"var(--mono)"}}>sort</span>
+          <div className="segmented" style={{width:200}}>
+            <button className={sort==="popular"?"active":""} onClick={()=>setSort("popular")}>Popular first</button>
+            <button className={sort==="alpha"?"active":""} onClick={()=>setSort("alpha")}>A → Z</button>
+          </div>
+          <div style={{display:"flex",gap:6}}>
+            <button className="icon-btn" onClick={()=>setView("grid")} style={{background:view==="grid"?"var(--accent-soft)":"",borderColor:view==="grid"?"var(--accent)":""}}><Icon.Grid/></button>
+            <button className="icon-btn" onClick={()=>setView("list")} style={{background:view==="list"?"var(--accent-soft)":"",borderColor:view==="list"?"var(--accent)":""}}><Icon.List/></button>
+          </div>
+        </div>
+
+        {/* ── Results info ───────────────────────────────────────────── */}
+        {q && (
+          <div style={{marginBottom:16, fontSize:13, color:"var(--ink-3)", fontFamily:"var(--mono)"}}>
+            {filtered.length === 0
+              ? `No results for "${q}"`
+              : `${filtered.length} tool${filtered.length!==1?"s":""} matching "${q}"`}
+          </div>
+        )}
+
+        {/* ── Tool grid / list ───────────────────────────────────────── */}
+        {filtered.length === 0 ? (
+          <div className="card" style={{padding:"60px 40px",textAlign:"center"}}>
+            <div style={{fontSize:36,marginBottom:12}}>🔍</div>
+            <div style={{fontSize:16,fontWeight:600,marginBottom:8}}>No tools found</div>
+            <div style={{fontSize:14,color:"var(--ink-2)",marginBottom:20}}>Try a different search term.</div>
+            <button className="btn btn-secondary btn-sm" onClick={()=>setQ("")}>Clear filter</button>
+          </div>
+        ) : view === "grid" ? (
+          <div className="grid-3">
+            {filtered.map(t => <ToolCard key={t.slug} tool={t}/>)}
+          </div>
+        ) : (
+          <div className="card" style={{padding:0,overflow:"hidden"}}>
+            {filtered.map((t, i) => {
+              const isLive = !!window.LIVE_TOOLS?.[t.slug];
+              return (
+                <a key={t.slug} href={toolUrl(t)}
+                  style={{display:"flex",alignItems:"center",gap:14,padding:"14px 20px",
+                    borderBottom:i<filtered.length-1?"1px solid var(--line)":"none",
+                    transition:"background 100ms"}}
+                  onMouseOver={e=>e.currentTarget.style.background="var(--bg-hover)"}
+                  onMouseOut={e=>e.currentTarget.style.background="transparent"}>
+                  <span style={{width:7,height:7,borderRadius:"50%",flexShrink:0,
+                    background:isLive?"var(--ok)":"var(--line-strong)"}}/>
+                  <span style={{fontFamily:"var(--mono)",fontSize:13.5,color:"var(--ink)",flex:1,fontWeight:500}}>{t.name}</span>
+                  {t.popular && <span className="chip" style={{padding:"2px 8px",fontSize:10.5}}><Icon.Star style={{color:"var(--accent-hi)"}}/> popular</span>}
+                  {isLive && <span className="chip ok" style={{padding:"2px 8px",fontSize:10.5,background:"rgba(52,211,153,.08)",borderColor:"rgba(52,211,153,.2)",color:"var(--ok)"}}>live</span>}
+                  <span style={{fontSize:13,color:"var(--ink-2)",maxWidth:"45%",overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{t.desc}</span>
+                  <Icon.Arrow style={{color:"var(--ink-3)",flexShrink:0}}/>
+                </a>
+              );
+            })}
+          </div>
+        )}
+
+        {/* ── Popular in this category ───────────────────────────────── */}
+        {popularTools.length > 0 && !q && (
+          <div style={{marginTop:64}}>
+            <div className="eyebrow" style={{marginBottom:8}}>most used in {cat.slug}</div>
+            <h2 className="h2" style={{marginBottom:24}}>Popular {cat.name} tools</h2>
+            <div className="grid-3">
+              {popularTools.map(t => <ToolCard key={t.slug} tool={t}/>)}
+            </div>
+          </div>
+        )}
+
+        {/* ── FAQ ───────────────────────────────────────────────────── */}
+        <div style={{marginTop:72}}>
+          <div className="eyebrow" style={{marginBottom:8}}>FAQ</div>
+          <h2 className="h2" style={{marginBottom:24}}>About {cat.name} tools</h2>
+          <div style={{maxWidth:820}}>
+            {[
+              ...faqList,
+              { q:`Are ${cat.name} tools free on TryDevTools?`, a:`Yes. Every ${cat.name.toLowerCase()} tool is completely free to use — no account, no subscription required.` },
+              { q:"Is my data ever sent to a server?", a:"Never. All processing happens in your browser using JavaScript. Open your browser's network tab while using any tool — you'll see zero outbound requests." },
+            ].map((f, i) => <FaqItem key={i} q={f.q} a={f.a} defaultOpen={i===0}/>)}
+          </div>
+        </div>
+
+        {/* ── Other categories ───────────────────────────────────────── */}
+        <div style={{marginTop:72}}>
+          <div className="eyebrow" style={{marginBottom:8}}>explore more</div>
+          <h2 className="h2" style={{marginBottom:24}}>Other categories</h2>
+          <div className="grid-4">
+            {otherCats.slice(0, 8).map(c => <CategoryCard key={c.slug} cat={c}/>)}
+          </div>
+        </div>
+
+      </div>
+    </AppShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<CategoryPage/>);
+</script>
+</body>
+</html>
