@@ -1,4 +1,4 @@
-// Full tool catalog for devtoolshub
+// Full tool catalog for TryDevTools
 window.CATEGORIES = [
   { slug: "json",        name: "JSON",        glyph: "{ }", color: "oklch(0.82 0.14 95)",  description: "Parse, format, validate and convert JSON — the lingua franca of APIs." },
   { slug: "text",        name: "Text",        glyph: "Aa",  color: "oklch(0.84 0.09 200)", description: "Manipulate, transform, count and clean any text." },

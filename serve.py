@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Tiny dev server that gives TryDevTools clean URLs.
 
-  /                       → index.html
-  /category/<slug>        → category.html  (component reads slug from URL path)
-  /tool/<slug>            → tool.html      (component reads slug from URL path)
-  anything else           → served as a normal static file
+  /                                → index.html
+  /categories                      → categories.html  (browse all categories)
+  /categories/<cat>                → category.html    (category page)
+  /categories/<cat>/<tool>         → tool.html        (canonical tool URL)
+  /category/... /tool/... /c/... /t/... → legacy aliases (kept for back-compat)
+  anything else                    → served as a normal static file
 
 Run:  python serve.py
 """
@@ -20,7 +22,18 @@ class CleanUrlHandler(http.server.SimpleHTTPRequestHandler):
     def translate_path(self, path):
         # strip query / fragment for matching
         clean = path.split("?", 1)[0].split("#", 1)[0]
-        # Match both new (/category, /tool) and legacy (/c, /t) prefixes
+        # /categories — index of all categories
+        if re.match(r"^/categories/?$", clean):
+            return os.path.join(ROOT, "categories.html")
+        # /categories/<cat>/<tool> — canonical tool URL (more-specific must come first)
+        if re.match(r"^/categories/[^/]+/[^/]+/?$", clean):
+            return os.path.join(ROOT, "tool.html")
+        # /categories/<cat> — single category page
+        if re.match(r"^/categories/[^/]+/?$", clean):
+            return os.path.join(ROOT, "category.html")
+        # ── legacy aliases ──
+        if re.match(r"^/category/[^/]+/[^/]+/?$", clean):
+            return os.path.join(ROOT, "tool.html")
         if re.match(r"^/(category|c)/[^/]+/?$", clean):
             return os.path.join(ROOT, "category.html")
         if re.match(r"^/(tool|t)/[^/]+/?$", clean):
