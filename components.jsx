@@ -57,11 +57,9 @@ function useDensity() {
 
 // ── Path helpers ─────────────────────────────────────────────────────────────
 const PFX = window.__PATH_PREFIX__ || "";
-function toolUrl(t) {
-  return `${PFX}tool.html?t=${t.slug}`;
-}
-function catUrl(c) { return `${PFX}category.html?c=${c.slug}`; }
-function homeUrl() { return `${PFX}index.html`; }
+function toolUrl(t) { return `${PFX}/tool/${t.slug}`; }
+function catUrl(c)  { return `${PFX}/category/${c.slug}`; }
+function homeUrl()  { return `${PFX}/`; }
 
 // ── Logo ─────────────────────────────────────────────────────────────────────
 function Logo({ href }) {
