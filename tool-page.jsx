@@ -101,6 +101,8 @@ function ToolPage({ slug }) {
           <div className="crumbs">
             <a href={homeUrl()}>home</a>
             <span className="sep">/</span>
+            <a href="/categories">categories</a>
+            <span className="sep">/</span>
             <a href={catUrl(cat)}>{cat.slug}</a>
             <span className="sep">/</span>
             <span style={{color:"var(--ink)"}}>{tool.slug}</span>

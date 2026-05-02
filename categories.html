@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>All Categories — TryDevTools</title>
+<meta name="description" content="Browse all 12 categories of developer tools — JSON, text, encoding, regex, color, time and more. 124 utilities running locally in your browser."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css?v=34"/>
+<style>
+  :root{--bg:#0d0f14;--bg-1:#12151c;--bg-2:#181c26;--bg-3:#1e2330;--bg-hover:#232a38;--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);--ink:#f0f2f8;--ink-2:#9ba3b8;--ink-3:#5d6882;--accent:#6366f1;--accent-hi:#818cf8;--accent-soft:rgba(99,102,241,0.12);--accent-glow:rgba(99,102,241,0.25);--ok:#34d399;--err:#f87171;--font:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:8px;--r-lg:14px;--r-xl:20px;--shadow-lg:0 12px 48px rgba(0,0,0,.6);--glow:0 0 0 1px var(--accent-glow),0 4px 24px var(--accent-glow)}
+  html[data-theme="light"]{--bg:#f5f6fa;--bg-1:#fff;--bg-2:#f0f1f7;--bg-3:#e8eaf3;--bg-hover:#eceef8;--line:rgba(0,0,0,0.07);--line-strong:rgba(0,0,0,0.14);--ink:#111827;--ink-2:#4b5568;--ink-3:#9ca3af;--accent:#4f46e5;--accent-hi:#6366f1;--accent-soft:rgba(79,70,229,0.08);--accent-glow:rgba(79,70,229,0.2)}
+  *,*::before,*::after{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;cursor:pointer;border:none;background:none}
+  .logo{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .logo-text{display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1}
+  .logo-text .brand{display:block;font-size:13.5px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+  .logo-text .tagline{display:block;font-size:8.5px;font-weight:500;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono)}
+  .site-header{position:sticky;top:0;z-index:100;height:64px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .site-header-inner{display:flex;align-items:center;gap:20px;height:100%}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);font-family:var(--mono);white-space:nowrap}
+  .chip.accent{background:var(--accent-soft);border-color:rgba(99,102,241,.25);color:var(--accent-hi)}
+</style>
+<script>
+  try {
+    const t = localStorage.getItem("dth_theme"); if (t) document.documentElement.dataset.theme = t;
+    const d = localStorage.getItem("dth_density"); if (d) document.documentElement.dataset.density = d;
+  } catch(e){}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="/data.js?v=34"></script>
+<script type="text/babel" src="/components.jsx?v=34"></script>
+
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+function CategoriesPage() {
+  const [q, setQ] = useState("");
+  const cats = window.CATEGORIES;
+  const tools = window.TOOLS;
+  const liveCount = tools.filter(t => t.live).length;
+
+  const stats = useMemo(() => cats.map(c => {
+    const catTools = tools.filter(t => t.category === c.slug);
+    return {
+      ...c,
+      total: catTools.length,
+      live: catTools.filter(t => t.live).length,
+      popular: catTools.filter(t => t.popular).slice(0, 3),
+    };
+  }), [cats, tools]);
+
+  const filtered = useMemo(() => {
+    if (!q.trim()) return stats;
+    const n = q.toLowerCase();
+    return stats.filter(c =>
+      c.name.toLowerCase().includes(n) ||
+      c.slug.toLowerCase().includes(n) ||
+      c.description.toLowerCase().includes(n)
+    );
+  }, [q, stats]);
+
+  return (
+    <AppShell active="categories">
+      {/* Hero */}
+      <section className="hero" style={{paddingBottom:48}}>
+        <div className="container">
+          <div style={{maxWidth:780, margin:"0 auto", textAlign:"center"}}>
+            <div className="hero-eyebrow">
+              <span className="chip accent">{cats.length} categories</span>
+              <span className="chip">
+                <span style={{width:7, height:7, borderRadius:"50%", background:"var(--ok)", display:"inline-block"}}/>
+                {liveCount} live tools
+              </span>
+            </div>
+            <h1 className="h1" style={{marginBottom:16}}>
+              Browse by <span className="grad-text">categories</span>
+            </h1>
+            <p style={{fontSize:17, color:"var(--ink-2)", maxWidth:"56ch", margin:"0 auto 32px", lineHeight:1.6}}>
+              Every tool you need, organised by purpose. {cats.length} categories, {tools.length} utilities, all running locally in your browser.
+            </p>
+            <div style={{maxWidth:520, margin:"0 auto"}}>
+              <div className="search-box" style={{padding:"12px 18px", borderRadius:14}}>
+                <Icon.Search style={{color:"var(--ink-3)"}}/>
+                <input value={q} onChange={e=>setQ(e.target.value)}
+                  placeholder="Filter categories — 'json', 'images', 'cron'…"
+                  style={{fontSize:15}}/>
+                {q && <button onClick={()=>setQ("")} style={{cursor:"pointer", color:"var(--ink-3)", display:"flex"}}><Icon.X/></button>}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{paddingTop:0}}>
+        <div className="container">
+          {q && (
+            <div style={{marginBottom:20, fontSize:13, color:"var(--ink-3)", fontFamily:"var(--mono)"}}>
+              {filtered.length === 0
+                ? `No categories match "${q}"`
+                : `${filtered.length} categor${filtered.length === 1 ? "y" : "ies"} matching "${q}"`}
+            </div>
+          )}
+
+          {filtered.length === 0 ? (
+            <div className="card" style={{padding:"60px 40px", textAlign:"center"}}>
+              <div style={{fontSize:36, marginBottom:12}}>🔍</div>
+              <div style={{fontSize:16, fontWeight:600, marginBottom:8}}>No categories found</div>
+              <button className="btn btn-secondary btn-sm" onClick={()=>setQ("")}>Clear filter</button>
+            </div>
+          ) : (
+            <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(340px, 1fr))", gap:14}}>
+              {filtered.map(c => (
+                <a key={c.slug} href={catUrl(c)} className="card card-hoverable" style={{padding:0, overflow:"hidden", display:"flex", flexDirection:"column"}}>
+                  {/* Top color stripe */}
+                  <div style={{height:6, background: c.color}}/>
+                  <div style={{padding:"22px 24px", display:"flex", flexDirection:"column", flex:1}}>
+                    <div style={{display:"flex", alignItems:"center", gap:14, marginBottom:14}}>
+                      <div style={{width:48, height:48, borderRadius:"var(--r-lg)", display:"flex", alignItems:"center", justifyContent:"center", background: c.color, fontFamily:"var(--mono)", fontSize:18, fontWeight:700, color:"rgba(0,0,0,.75)", flexShrink:0}}>
+                        {c.glyph}
+                      </div>
+                      <div style={{flex:1, minWidth:0}}>
+                        <div style={{fontSize:18, fontWeight:700, color:"var(--ink)", letterSpacing:"-0.01em"}}>{c.name}</div>
+                        <div style={{fontFamily:"var(--mono)", fontSize:11.5, color:"var(--ink-3)", marginTop:2}}>/{c.slug}</div>
+                      </div>
+                    </div>
+                    <p style={{fontSize:13.5, color:"var(--ink-2)", lineHeight:1.6, margin:"0 0 16px", flex:1}}>{c.description}</p>
+                    <div style={{display:"flex", gap:6, flexWrap:"wrap", marginBottom:14}}>
+                      <span className="chip">{c.total} tools</span>
+                      <span className="chip" style={{color: c.live === c.total ? "var(--ok)" : "var(--ink-2)"}}>
+                        <span style={{width:6, height:6, borderRadius:"50%", background: c.live === c.total ? "var(--ok)" : "var(--ink-3)", display:"inline-block"}}/>
+                        {c.live} live
+                      </span>
+                      {c.popular.length > 0 && <span className="chip"><Icon.Star style={{color:"var(--accent-hi)"}}/> {c.popular.length} popular</span>}
+                    </div>
+                    {c.popular.length > 0 && (
+                      <div style={{display:"flex", flexWrap:"wrap", gap:6, paddingTop:14, borderTop:"1px solid var(--line)"}}>
+                        {c.popular.map(p => (
+                          <span key={p.slug} style={{fontFamily:"var(--mono)", fontSize:11, color:"var(--ink-3)", padding:"3px 8px", background:"var(--bg-2)", borderRadius:4}}>{p.name}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+
+          {/* Stats summary */}
+          <div className="card" style={{marginTop:48, padding:"28px 32px", display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:24, textAlign:"center"}}>
+            <div>
+              <div style={{fontSize:32, fontWeight:800, color:"var(--accent-hi)", fontFamily:"var(--mono)", letterSpacing:"-0.02em"}}>{cats.length}</div>
+              <div className="eyebrow" style={{marginTop:4}}>categories</div>
+            </div>
+            <div>
+              <div style={{fontSize:32, fontWeight:800, color:"var(--accent-hi)", fontFamily:"var(--mono)", letterSpacing:"-0.02em"}}>{tools.length}</div>
+              <div className="eyebrow" style={{marginTop:4}}>tools total</div>
+            </div>
+            <div>
+              <div style={{fontSize:32, fontWeight:800, color:"var(--ok)", fontFamily:"var(--mono)", letterSpacing:"-0.02em"}}>{liveCount}</div>
+              <div className="eyebrow" style={{marginTop:4}}>live</div>
+            </div>
+            <div>
+              <div style={{fontSize:32, fontWeight:800, color:"var(--accent-hi)", fontFamily:"var(--mono)", letterSpacing:"-0.02em"}}>{tools.filter(t => t.popular).length}</div>
+              <div className="eyebrow" style={{marginTop:4}}>popular</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </AppShell>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<CategoriesPage/>);
+</script>
+</body>
+</html>

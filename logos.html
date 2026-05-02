@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Logo concepts — TryDevTools</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css?v=34"/>
+<style>
+  body { font-family:'Plus Jakarta Sans',sans-serif; background:#0d0f14; color:#f0f2f8; margin:0; padding:60px 40px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  h1 { font-size:36px; margin:0 0 8px; letter-spacing:-0.02em; }
+  .sub { color:#9ba3b8; font-size:15px; margin-bottom:48px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(440px, 1fr)); gap:18px; }
+  .card { background:#12151c; border:1px solid rgba(255,255,255,0.07); border-radius:16px; padding:28px; }
+  .card h3 { margin:0 0 4px; font-size:14px; color:#9ba3b8; font-family:'JetBrains Mono', monospace; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; }
+  .card .name { font-size:20px; font-weight:700; margin-bottom:24px; letter-spacing:-0.01em; }
+  .preview { display:flex; align-items:center; gap:14px; padding:18px; background:#181c26; border-radius:12px; border:1px solid rgba(255,255,255,0.05); }
+  .mark { width:48px; height:48px; border-radius:12px; background:#6366f1; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .text { display:flex; flex-direction:column; gap:2px; }
+  .text .brand { font-size:18px; font-weight:700; letter-spacing:-0.02em; }
+  .text .tagline { font-size:11px; font-weight:500; color:#5d6882; letter-spacing:0.05em; text-transform:uppercase; font-family:'JetBrains Mono',monospace; }
+  .small-preview { display:flex; align-items:center; gap:8px; padding:10px 14px; background:#181c26; border-radius:8px; margin-top:10px; }
+  .small-preview .mark { width:28px; height:28px; border-radius:7px; }
+  .small-preview .brand { font-size:12px; font-weight:700; }
+  .meta { margin-top:16px; font-size:12px; color:#5d6882; font-family:'JetBrains Mono',monospace; }
+  .footer { margin-top:60px; padding:24px; background:#12151c; border-radius:14px; border:1px solid rgba(255,255,255,0.07); }
+  .footer h2 { margin:0 0 8px; font-size:18px; }
+  .footer p { color:#9ba3b8; font-size:14px; line-height:1.6; margin:0; }
+  .footer code { background:#181c26; padding:2px 8px; border-radius:5px; color:#818cf8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Logo concepts</h1>
+  <p class="sub">Five directions for the TryDevTools mark. Each renders in the standard 34×34 rounded-square slot used in the header. Pick one and I'll apply it.</p>
+
+  <div class="grid">
+
+    <!-- 1: Code brackets -->
+    <div class="card">
+      <h3>Concept 1</h3>
+      <div class="name">&lt;/&gt; Brackets</div>
+      <div class="preview">
+        <div class="mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M8 6L3 12l5 6M16 6l5 6-5 6M14 4l-4 16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="text">
+          <span class="brand">TryDevTools</span>
+          <span class="tagline">developer utilities</span>
+        </div>
+      </div>
+      <div class="small-preview">
+        <div class="mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M8 6L3 12l5 6M16 6l5 6-5 6M14 4l-4 16" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="brand">TryDevTools</span>
+      </div>
+      <div class="meta">classic dev iconography · &lt; / &gt; tags</div>
+    </div>
+
+    <!-- 2: Stacked layers -->
+    <div class="card">
+      <h3>Concept 2</h3>
+      <div class="name">Layered Tools</div>
+      <div class="preview">
+        <div class="mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="14" height="3.5" rx="1.2" fill="#fff"/>
+            <rect x="6" y="10.25" width="14" height="3.5" rx="1.2" fill="#fff" opacity="0.75"/>
+            <rect x="3" y="16.5" width="14" height="3.5" rx="1.2" fill="#fff" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="text">
+          <span class="brand">TryDevTools</span>
+          <span class="tagline">developer utilities</span>
+        </div>
+      </div>
+      <div class="small-preview">
+        <div class="mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="14" height="3.5" rx="1.2" fill="#fff"/>
+            <rect x="6" y="10.25" width="14" height="3.5" rx="1.2" fill="#fff" opacity="0.75"/>
+            <rect x="3" y="16.5" width="14" height="3.5" rx="1.2" fill="#fff" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="brand">TryDevTools</span>
+      </div>
+      <div class="meta">stacked utilities · suggests many tools</div>
+    </div>
+
+    <!-- 3: Terminal prompt -->
+    <div class="card">
+      <h3>Concept 3</h3>
+      <div class="name">Terminal Prompt</div>
+      <div class="preview">
+        <div class="mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7l5 5-5 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="12" y="15.5" width="8" height="2.5" rx="0.6" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="text">
+          <span class="brand">TryDevTools</span>
+          <span class="tagline">developer utilities</span>
+        </div>
+      </div>
+      <div class="small-preview">
+        <div class="mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7l5 5-5 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="12" y="15.5" width="8" height="2.5" rx="0.6" fill="#fff"/>
+          </svg>
+        </div>
+        <span class="brand">TryDevTools</span>
+      </div>
+      <div class="meta">CLI cursor · refined version of current</div>
+    </div>
+
+    <!-- 4: Hex / cube -->
+    <div class="card">
+      <h3>Concept 4</h3>
+      <div class="name">Hex Cube</div>
+      <div class="preview">
+        <div class="mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.5L21 7.5v9L12 21.5L3 16.5v-9L12 2.5Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 7.5L12 12.5M21 7.5L12 12.5M12 12.5V21.5" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+          </svg>
+        </div>
+        <div class="text">
+          <span class="brand">TryDevTools</span>
+          <span class="tagline">developer utilities</span>
+        </div>
+      </div>
+      <div class="small-preview">
+        <div class="mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.5L21 7.5v9L12 21.5L3 16.5v-9L12 2.5Z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M3 7.5L12 12.5M21 7.5L12 12.5M12 12.5V21.5" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity="0.85"/>
+          </svg>
+        </div>
+        <span class="brand">TryDevTools</span>
+      </div>
+      <div class="meta">geometric · package / module / build</div>
+    </div>
+
+    <!-- 5: Lightning bolt -->
+    <div class="card">
+      <h3>Concept 5</h3>
+      <div class="name">Lightning</div>
+      <div class="preview">
+        <div class="mark">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14h7l-1 8 11-12h-7l1-8z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="text">
+          <span class="brand">TryDevTools</span>
+          <span class="tagline">developer utilities</span>
+        </div>
+      </div>
+      <div class="small-preview">
+        <div class="mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L3 14h7l-1 8 11-12h-7l1-8z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="brand">TryDevTools</span>
+      </div>
+      <div class="meta">speed / power · "instant tools, in your browser"</div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <h2>Pick a concept</h2>
+    <p>Tell me <code>concept 1</code> through <code>concept 5</code> (or describe a tweak — bigger / thinner stroke, different shape, etc.) and I'll wire it into <code>components.jsx</code> across every page.</p>
+  </div>
+</div>
+</body>
+</html>

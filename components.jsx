@@ -57,8 +57,8 @@ function useDensity() {
 
 // ── Path helpers ─────────────────────────────────────────────────────────────
 const PFX = window.__PATH_PREFIX__ || "";
-function toolUrl(t) { return `${PFX}/tool/${t.slug}`; }
-function catUrl(c)  { return `${PFX}/category/${c.slug}`; }
+function toolUrl(t) { return `${PFX}/categories/${t.category}/${t.slug}`; }
+function catUrl(c)  { return `${PFX}/categories/${c.slug}`; }
 function homeUrl()  { return `${PFX}/`; }
 
 // ── Logo ─────────────────────────────────────────────────────────────────────
@@ -87,8 +87,8 @@ function Header({ active, onOpenCmdK }) {
       <div className="container site-header-inner">
         <Logo/>
         <nav className="header-nav">
-          <a href={homeUrl()} className={active === "home" ? "active" : ""}>Tools</a>
-          <a href={`${PFX}category.html?c=json`} className={active === "categories" ? "active" : ""}>Categories</a>
+          <a href={homeUrl()} className={active === "home" ? "active" : ""}>Home</a>
+          <a href={`${PFX}/categories`} className={active === "categories" ? "active" : ""}>Categories</a>
           <a href="#">Changelog</a>
           <a href="#">API</a>
         </nav>
