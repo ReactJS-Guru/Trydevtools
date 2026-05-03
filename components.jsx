@@ -112,27 +112,53 @@ function Header({ active, onOpenCmdK }) {
 
 // ── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
-  const cats = window.CATEGORIES.slice(0, 4);
+  const cats = window.CATEGORIES;
   return (
     <footer className="site-footer">
       <div className="container">
-        <div className="footer-grid">
-          <div>
+        {/* Top: brand info + grouped link columns */}
+        <div className="footer-top">
+          <div className="footer-brand">
             <Logo/>
-            <p style={{fontSize:13.5, color:"var(--ink-2)", maxWidth:"30ch", marginTop:16, lineHeight:1.65}}>
-              150+ privacy-first developer utilities. Everything runs in your browser — no accounts, no uploads, no tracking.
+            <p style={{fontSize:13.5, color:"var(--ink-2)", maxWidth:"42ch", marginTop:16, lineHeight:1.65}}>
+              {window.TOOLS.length} privacy-first developer utilities across {cats.length} categories. Everything runs in your browser — no accounts, no uploads, no tracking.
             </p>
-            <div style={{display:"flex", gap:8, marginTop:20, flexWrap:"wrap"}}>
-              <a href="#" className="chip">changelog</a>
-              <a href="#" className="chip">privacy policy</a>
-              <a href="#" className="chip">contact</a>
+            <div style={{display:"flex", alignItems:"center", gap:8, marginTop:16, fontSize:11.5, fontFamily:"var(--mono)", color:"var(--ink-3)", textTransform:"uppercase", letterSpacing:".06em"}}>
+              <span style={{width:6, height:6, borderRadius:"50%", background:"var(--ok)"}}/>
+              built in your browser · no tracking
             </div>
           </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Explore</h6>
+            <a href={homeUrl()}>Home</a>
+            <a href="/categories">All categories</a>
+            <a href={catUrl({slug:"json"})}>Popular tools</a>
+          </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Resources</h6>
+            <a href="#">Changelog</a>
+            <a href="#">API</a>
+            <a href="https://github.com" target="_blank" rel="noopener">
+              GitHub <span style={{fontSize:10, opacity:.6, marginLeft:3}}>↗</span>
+            </a>
+          </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Company</h6>
+            <a href="/privacy">Privacy</a>
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+
+        {/* All 12 categories */}
+        <div className="footer-cats">
           {cats.map(c => (
             <div className="footer-col" key={c.slug}>
               <h5>{c.name}</h5>
               <ul>
-                {window.TOOLS.filter(t => t.category === c.slug).slice(0, 5).map(t => (
+                {window.TOOLS.filter(t => t.category === c.slug).slice(0, 4).map(t => (
                   <li key={t.slug}><a href={toolUrl(t)}>{t.name}</a></li>
                 ))}
                 <li><a href={catUrl(c)} style={{color:"var(--accent-hi)"}}>All {c.name} →</a></li>
@@ -140,6 +166,7 @@ function Footer() {
             </div>
           ))}
         </div>
+
         <div className="footer-bottom">
           <span>© 2026 TryDevTools. All rights reserved.</span>
           <span>v5.0 · runs in your browser</span>

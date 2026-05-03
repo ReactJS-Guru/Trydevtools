@@ -22,6 +22,11 @@ class CleanUrlHandler(http.server.SimpleHTTPRequestHandler):
     def translate_path(self, path):
         # strip query / fragment for matching
         clean = path.split("?", 1)[0].split("#", 1)[0]
+        # /privacy and /contact — static pages
+        if re.match(r"^/privacy/?$", clean):
+            return os.path.join(ROOT, "privacy.html")
+        if re.match(r"^/contact/?$", clean):
+            return os.path.join(ROOT, "contact.html")
         # /categories — index of all categories
         if re.match(r"^/categories/?$", clean):
             return os.path.join(ROOT, "categories.html")
