@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Contact — TryDevTools</title>
+<meta name="description" content="Get in touch — feature requests, bug reports, or feedback for TryDevTools."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css?v=40"/>
+<style>
+  :root{--bg:#0d0f14;--bg-1:#12151c;--bg-2:#181c26;--bg-3:#1e2330;--bg-hover:#232a38;--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);--ink:#f0f2f8;--ink-2:#9ba3b8;--ink-3:#5d6882;--accent:#6366f1;--accent-hi:#818cf8;--accent-soft:rgba(99,102,241,0.12);--accent-glow:rgba(99,102,241,0.25);--ok:#34d399;--err:#f87171;--font:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:8px;--r-lg:14px;--r-xl:20px;--shadow-lg:0 12px 48px rgba(0,0,0,.6);--glow:0 0 0 1px var(--accent-glow),0 4px 24px var(--accent-glow)}
+  html[data-theme="light"]{--bg:#f5f6fa;--bg-1:#fff;--bg-2:#f0f1f7;--bg-3:#e8eaf3;--bg-hover:#eceef8;--line:rgba(0,0,0,0.07);--line-strong:rgba(0,0,0,0.14);--ink:#111827;--ink-2:#4b5568;--ink-3:#9ca3af;--accent:#4f46e5;--accent-hi:#6366f1;--accent-soft:rgba(79,70,229,0.08);--accent-glow:rgba(79,70,229,0.2)}
+  *,*::before,*::after{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;cursor:pointer;border:none;background:none}
+  .logo{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .logo-text{display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1}
+  .logo-text .brand{display:block;font-size:13.5px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+  .logo-text .tagline{display:block;font-size:8.5px;font-weight:500;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono)}
+  .site-header{position:sticky;top:0;z-index:100;height:64px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .site-header-inner{display:flex;align-items:center;gap:20px;height:100%}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);font-family:var(--mono);white-space:nowrap}
+  .chip.accent{background:var(--accent-soft);border-color:rgba(99,102,241,.25);color:var(--accent-hi)}
+</style>
+<script>
+  try {
+    const t = localStorage.getItem("dth_theme"); if (t) document.documentElement.dataset.theme = t;
+  } catch(e){}
+</script>
+</head>
+<body>
+<div id="root"><div class="sk-loading">
+  <div class="sk-header-bar">
+    <span class="skeleton" style="width:34px;height:34px;border-radius:9px;"></span>
+    <span class="skeleton sk-line" style="width:110px;"></span>
+    <span style="flex:1;"></span>
+    <span class="skeleton" style="width:36px;height:36px;border-radius:8px;"></span>
+  </div>
+  <div style="max-width:780px;margin:0 auto;padding:56px 40px;">
+    <div class="skeleton" style="width:50%;height:42px;border-radius:8px;margin-bottom:14px;"></div>
+    <div class="skeleton sk-line" style="width:90%;margin-bottom:8px;"></div>
+    <div class="skeleton sk-line" style="width:70%;margin-bottom:32px;"></div>
+    <div class="skeleton" style="width:100%;height:140px;border-radius:14px;margin-bottom:14px;"></div>
+    <div class="skeleton" style="width:100%;height:140px;border-radius:14px;"></div>
+  </div>
+</div></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="/data.js?v=40"></script>
+<script type="text/babel" src="/components.jsx?v=40"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", topic: "feedback", message: "" });
+  const [copied, setCopied] = useState(false);
+
+  const set = (k, v) => setForm(prev => ({ ...prev, [k]: v }));
+
+  const subject = encodeURIComponent(`[${form.topic}] ${form.name ? "from " + form.name : "TryDevTools"}`);
+  const body = encodeURIComponent(`${form.message}\n\n— ${form.name || "(anonymous)"}${form.email ? "\n" + form.email : ""}`);
+  const mailto = `mailto:hello@trydevtools.com?subject=${subject}&body=${body}`;
+
+  const githubIssue = "https://github.com/your-org/trydevtools/issues/new";
+
+  const inputStyle = { width:"100%", padding:"10px 14px", background:"var(--bg-1)", border:"1px solid var(--line)", borderRadius:"var(--r)", color:"var(--ink)", fontFamily:"var(--mono)", fontSize:14, outline:"none" };
+
+  const fields = [
+    { type:"channel", title:"GitHub issues", desc:"Best for bug reports and feature requests — public, trackable.", action:"Open an issue", href:githubIssue, icon:"🐛" },
+    { type:"channel", title:"Email", desc:"For private feedback, partnership or anything you'd rather not file publicly.", action:"hello@trydevtools.com", href:"mailto:hello@trydevtools.com", icon:"✉️" },
+  ];
+
+  return (
+    <AppShell active="">
+      <div style={{maxWidth:780, margin:"0 auto", padding:"56px 40px 80px"}}>
+        <h1 style={{fontSize:42, letterSpacing:"-0.03em", margin:"0 0 14px", lineHeight:1.1}}>Contact</h1>
+        <p style={{fontSize:17, color:"var(--ink-2)", lineHeight:1.65, margin:"0 0 36px", maxWidth:"60ch"}}>
+          Found a bug, want a tool, have feedback, or just want to say hi? Pick whichever channel suits you — there's no wrong way.
+        </p>
+
+        {/* Quick channels */}
+        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:36}}>
+          {fields.map(f => (
+            <a key={f.title} href={f.href} target={f.href.startsWith("http") ? "_blank" : undefined} rel="noopener" className="card card-hoverable" style={{padding:"22px 24px", display:"block", textDecoration:"none"}}>
+              <div style={{fontSize:28, marginBottom:10, lineHeight:1}}>{f.icon}</div>
+              <div style={{fontSize:16, fontWeight:700, marginBottom:6, color:"var(--ink)"}}>{f.title}</div>
+              <div style={{fontSize:13.5, color:"var(--ink-2)", lineHeight:1.55, marginBottom:14}}>{f.desc}</div>
+              <div style={{fontSize:13, color:"var(--accent-hi)", fontFamily:"var(--mono)"}}>{f.action} →</div>
+            </a>
+          ))}
+        </div>
+
+        {/* Compose form (uses mailto:) */}
+        <div className="card" style={{padding:"28px 30px"}}>
+          <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20}}>
+            <h2 style={{fontSize:20, margin:0, letterSpacing:"-0.01em"}}>Send a quick message</h2>
+            <span style={{fontSize:12, color:"var(--ink-3)", fontFamily:"var(--mono)"}}>opens your email client</span>
+          </div>
+
+          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:14, marginBottom:14}}>
+            <label style={{display:"block"}}>
+              <div className="eyebrow" style={{marginBottom:6}}>your name</div>
+              <input value={form.name} onChange={e=>set("name", e.target.value)} placeholder="Ada Lovelace" style={inputStyle} spellCheck="false"/>
+            </label>
+            <label style={{display:"block"}}>
+              <div className="eyebrow" style={{marginBottom:6}}>your email · optional</div>
+              <input value={form.email} onChange={e=>set("email", e.target.value)} type="email" placeholder="ada@example.com" style={inputStyle} spellCheck="false"/>
+            </label>
+          </div>
+
+          <label style={{display:"block", marginBottom:14}}>
+            <div className="eyebrow" style={{marginBottom:6}}>topic</div>
+            <div className="segmented" style={{width:420}}>
+              {["bug","feature","feedback","other"].map(t => (
+                <button key={t} className={form.topic===t?"active":""} onClick={()=>set("topic", t)}>{t}</button>
+              ))}
+            </div>
+          </label>
+
+          <label style={{display:"block", marginBottom:18}}>
+            <div className="eyebrow" style={{marginBottom:6}}>message</div>
+            <textarea value={form.message} onChange={e=>set("message", e.target.value)} placeholder="What's on your mind?" rows={6} style={{...inputStyle, resize:"vertical", fontFamily:"var(--font)"}}/>
+          </label>
+
+          <div style={{display:"flex", gap:10, alignItems:"center", flexWrap:"wrap"}}>
+            <a href={mailto} className="btn btn-primary btn-sm" style={{textDecoration:"none"}}>Send via email client →</a>
+            <button className="btn btn-ghost btn-sm" onClick={()=>{
+              const txt = `Topic: ${form.topic}\n\n${form.message}\n\n— ${form.name || "(anonymous)"}${form.email ? "\n" + form.email : ""}`;
+              navigator.clipboard.writeText(txt); setCopied(true); setTimeout(()=>setCopied(false), 1400);
+            }}>{copied ? "✓ Copied" : "Copy text"}</button>
+            <span style={{flex:1}}/>
+            <span style={{fontSize:11, color:"var(--ink-3)", fontFamily:"var(--mono)"}}>nothing is sent until you hit send in your client</span>
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div style={{marginTop:48}}>
+          <h2 style={{fontSize:20, margin:"0 0 14px", letterSpacing:"-0.01em"}}>Common questions</h2>
+          <div className="card" style={{padding:0, overflow:"hidden"}}>
+            {[
+              { q: "Will you store anything I send you?", a: "Only what you choose to put in the email. Nothing here is logged on a server — clicking 'Send' opens your local email client." },
+              { q: "How fast do you reply?", a: "Best-effort. GitHub issues usually get a response within 1-2 days; email might take a bit longer." },
+              { q: "Can I request a tool that's missing?", a: "Yes! Open a GitHub issue or use the form above — describe what you need and what existing tool comes closest." },
+              { q: "I found a bug. What info helps?", a: "Browser + version, the input that triggered the bug, and a screenshot of any error. The console (F12 → Console) is gold." },
+            ].map((f, i, arr) => (
+              <div key={i} style={{padding:"16px 20px", borderBottom: i < arr.length-1 ? "1px solid var(--line)" : "none"}}>
+                <div style={{fontSize:14.5, fontWeight:600, color:"var(--ink)", marginBottom:6}}>{f.q}</div>
+                <div style={{fontSize:13.5, color:"var(--ink-2)", lineHeight:1.6}}>{f.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </AppShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<ContactPage/>);
+</script>
+</body>
+</html>

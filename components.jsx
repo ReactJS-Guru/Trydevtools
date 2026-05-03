@@ -116,17 +116,39 @@ function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-        {/* Top: brand info */}
+        {/* Top: brand info + grouped link columns */}
         <div className="footer-top">
-          <Logo/>
-          <p style={{fontSize:13.5, color:"var(--ink-2)", maxWidth:"56ch", marginTop:16, lineHeight:1.65}}>
-            {window.TOOLS.length}+ privacy-first developer utilities across {cats.length} categories. Everything runs in your browser — no accounts, no uploads, no tracking.
-          </p>
-          <div style={{display:"flex", gap:8, marginTop:18, flexWrap:"wrap"}}>
-            <a href="/categories" className="chip">all categories</a>
-            <a href="#" className="chip">changelog</a>
-            <a href="#" className="chip">privacy policy</a>
-            <a href="#" className="chip">contact</a>
+          <div className="footer-brand">
+            <Logo/>
+            <p style={{fontSize:13.5, color:"var(--ink-2)", maxWidth:"42ch", marginTop:16, lineHeight:1.65}}>
+              {window.TOOLS.length} privacy-first developer utilities across {cats.length} categories. Everything runs in your browser — no accounts, no uploads, no tracking.
+            </p>
+            <div style={{display:"flex", alignItems:"center", gap:8, marginTop:16, fontSize:11.5, fontFamily:"var(--mono)", color:"var(--ink-3)", textTransform:"uppercase", letterSpacing:".06em"}}>
+              <span style={{width:6, height:6, borderRadius:"50%", background:"var(--ok)"}}/>
+              built in your browser · no tracking
+            </div>
+          </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Explore</h6>
+            <a href={homeUrl()}>Home</a>
+            <a href="/categories">All categories</a>
+            <a href={catUrl({slug:"json"})}>Popular tools</a>
+          </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Resources</h6>
+            <a href="#">Changelog</a>
+            <a href="#">API</a>
+            <a href="https://github.com" target="_blank" rel="noopener">
+              GitHub <span style={{fontSize:10, opacity:.6, marginLeft:3}}>↗</span>
+            </a>
+          </div>
+
+          <div className="footer-nav-group">
+            <h6 className="footer-nav-title">Company</h6>
+            <a href="/privacy">Privacy</a>
+            <a href="/contact">Contact</a>
           </div>
         </div>
 

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Privacy Policy — TryDevTools</title>
+<meta name="description" content="TryDevTools is privacy-first by design. Everything runs locally in your browser — no data is collected, no accounts, no tracking."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css?v=40"/>
+<style>
+  :root{--bg:#0d0f14;--bg-1:#12151c;--bg-2:#181c26;--bg-3:#1e2330;--bg-hover:#232a38;--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.13);--ink:#f0f2f8;--ink-2:#9ba3b8;--ink-3:#5d6882;--accent:#6366f1;--accent-hi:#818cf8;--accent-soft:rgba(99,102,241,0.12);--accent-glow:rgba(99,102,241,0.25);--ok:#34d399;--err:#f87171;--font:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:8px;--r-lg:14px;--r-xl:20px;--shadow-lg:0 12px 48px rgba(0,0,0,.6);--glow:0 0 0 1px var(--accent-glow),0 4px 24px var(--accent-glow)}
+  html[data-theme="light"]{--bg:#f5f6fa;--bg-1:#fff;--bg-2:#f0f1f7;--bg-3:#e8eaf3;--bg-hover:#eceef8;--line:rgba(0,0,0,0.07);--line-strong:rgba(0,0,0,0.14);--ink:#111827;--ink-2:#4b5568;--ink-3:#9ca3af;--accent:#4f46e5;--accent-hi:#6366f1;--accent-soft:rgba(79,70,229,0.08);--accent-glow:rgba(79,70,229,0.2)}
+  *,*::before,*::after{box-sizing:border-box} html,body{margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none} button{font:inherit;cursor:pointer;border:none;background:none}
+  .logo{display:inline-flex;align-items:center;gap:10px;flex-shrink:0;white-space:nowrap;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .logo-text{display:flex;flex-direction:column;gap:2px;white-space:nowrap;line-height:1}
+  .logo-text .brand{display:block;font-size:13.5px;font-weight:700;letter-spacing:-0.02em;color:var(--ink)}
+  .logo-text .tagline{display:block;font-size:8.5px;font-weight:500;color:var(--ink-3);letter-spacing:.05em;text-transform:uppercase;font-family:var(--mono)}
+  .site-header{position:sticky;top:0;z-index:100;height:64px;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+  .site-header-inner{display:flex;align-items:center;gap:20px;height:100%}
+  .container{max-width:1280px;margin:0 auto;padding:0 40px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:500;border:1px solid var(--line);background:var(--bg-2);color:var(--ink-2);font-family:var(--mono);white-space:nowrap}
+  .chip.accent{background:var(--accent-soft);border-color:rgba(99,102,241,.25);color:var(--accent-hi)}
+  .doc { max-width: 780px; margin: 0 auto; padding: 56px 40px 80px; }
+  .doc h1 { font-size: 42px; letter-spacing: -0.03em; margin: 0 0 14px; line-height: 1.1; }
+  .doc .lead { font-size: 17px; color: var(--ink-2); line-height: 1.65; margin: 0 0 8px; max-width: 60ch; }
+  .doc .updated { font-size: 12px; color: var(--ink-3); font-family: var(--mono); margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  .doc h2 { font-size: 22px; margin: 36px 0 14px; letter-spacing: -0.01em; color: var(--ink); }
+  .doc h3 { font-size: 16px; margin: 24px 0 8px; color: var(--ink); font-weight: 700; }
+  .doc p, .doc ul { font-size: 15px; color: var(--ink-2); line-height: 1.7; margin: 0 0 14px; }
+  .doc ul { padding-left: 22px; }
+  .doc li { margin: 6px 0; }
+  .doc strong { color: var(--ink); font-weight: 600; }
+  .doc code { font-family: var(--mono); font-size: 13px; background: var(--bg-2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 5px; color: var(--accent-hi); }
+  .doc a { color: var(--accent-hi); text-decoration: underline; text-decoration-color: rgba(129,140,248,.4); }
+  .doc a:hover { text-decoration-color: var(--accent-hi); }
+  .doc .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0; }
+</style>
+<script>
+  try {
+    const t = localStorage.getItem("dth_theme"); if (t) document.documentElement.dataset.theme = t;
+  } catch(e){}
+</script>
+</head>
+<body>
+<div id="root"><div class="sk-loading">
+  <div class="sk-header-bar">
+    <span class="skeleton" style="width:34px;height:34px;border-radius:9px;"></span>
+    <span class="skeleton sk-line" style="width:110px;"></span>
+    <span style="flex:1;"></span>
+    <span class="skeleton" style="width:36px;height:36px;border-radius:8px;"></span>
+  </div>
+  <div class="doc">
+    <div class="skeleton" style="width:60%;height:42px;border-radius:8px;margin-bottom:14px;"></div>
+    <div class="skeleton sk-line" style="width:90%;margin-bottom:8px;"></div>
+    <div class="skeleton sk-line" style="width:70%;margin-bottom:32px;"></div>
+    <div class="skeleton sk-line" style="width:40%;height:18px;margin-bottom:16px;"></div>
+    <div class="skeleton sk-line" style="width:95%;margin-bottom:6px;"></div>
+    <div class="skeleton sk-line" style="width:90%;margin-bottom:6px;"></div>
+    <div class="skeleton sk-line" style="width:80%;margin-bottom:24px;"></div>
+  </div>
+</div></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="/data.js?v=40"></script>
+<script type="text/babel" src="/components.jsx?v=40"></script>
+
+<script type="text/babel">
+function PrivacyPage() {
+  return (
+    <AppShell active="">
+      <div className="doc">
+        <h1>Privacy Policy</h1>
+        <p className="lead">
+          TryDevTools is built on a single principle: <strong>your data never leaves your device</strong>. Every tool runs entirely in your browser using JavaScript — there is no backend, no upload step, no telemetry.
+        </p>
+        <div className="updated">Last updated: 2026-05-03 · v5.0</div>
+
+        <h2>1. What we collect</h2>
+        <p><strong>Nothing.</strong> We have no servers that process your input. When you paste a JWT, format JSON, generate a UUID, or hash a string, the work happens in JavaScript on your machine. The page does not POST anything to us; you can verify this yourself by opening your browser's Network tab while using any tool.</p>
+
+        <h2>2. Local storage</h2>
+        <p>The site uses <code>localStorage</code> on your own device for convenience. The data is never transmitted anywhere. Specifically, we store:</p>
+        <ul>
+          <li><code>dth_theme</code> — your light/dark preference</li>
+          <li><code>dth_density</code> — your comfortable/compact preference</li>
+          <li><code>dth_accent</code> — your accent colour</li>
+          <li><code>dth_recents</code> — last 8 tools you opened (so the home page can show "Recently used")</li>
+          <li><code>dth_*_in</code> — the contents of each tool's input area, so it's still there when you come back</li>
+        </ul>
+        <p>You can clear all of it any time from your browser's site-data settings, or by clicking <strong>Clear history</strong> in the "Recently used" section of the home page. This data lives only on your device.</p>
+
+        <h2>3. Cookies</h2>
+        <p>We do not set any cookies. The site uses no analytics, no advertising network, no session cookies, no tracking pixels.</p>
+
+        <h2>4. Third-party resources</h2>
+        <p>The site loads its JavaScript dependencies from public CDNs (jsDelivr and unpkg) so we don't have to host them ourselves:</p>
+        <ul>
+          <li><code>react</code> + <code>react-dom</code> — UI library</li>
+          <li><code>@babel/standalone</code> — compiles JSX in your browser</li>
+          <li><code>marked</code> — markdown rendering for the Markdown tools</li>
+          <li><code>js-yaml</code>, <code>jsbarcode</code>, <code>qrcode-generator</code>, <code>exifr</code>, <code>bcryptjs</code>, <code>sql-formatter</code>, <code>prettier</code>, <code>ua-parser-js</code> — loaded on demand by specific tools</li>
+        </ul>
+        <p>These CDNs see your IP address (as any web request would) and serve the requested file. They do not receive any data from inside the tools.</p>
+
+        <h2>5. Tools that opt-in to network requests</h2>
+        <p>A small number of tools genuinely cannot work without making a network request. Each one shows a clear notice before doing so:</p>
+        <ul>
+          <li><strong>DNS Lookup</strong> — sends the hostname you enter to Cloudflare's public DNS-over-HTTPS endpoint <code>cloudflare-dns.com/dns-query</code>.</li>
+          <li><strong>CORS Tester</strong> — sends a real HTTP request from your browser to the URL you enter, so it can show you the response headers.</li>
+          <li><strong>Headers Analyzer</strong> — same: fetches the URL you enter to inspect the response headers.</li>
+        </ul>
+        <p>These three tools will only make a request when you explicitly click the button. We never see those requests; they go directly from your browser to the destination.</p>
+
+        <h2>6. Account &amp; identity</h2>
+        <p>There is no account system. There is no "Sign in" that posts your credentials anywhere — the button visible in the header is decorative for now. We don't know who you are, and we don't want to.</p>
+
+        <h2>7. Children's privacy</h2>
+        <p>Because no personal data is collected, the service is safe for users of any age.</p>
+
+        <h2>8. Changes to this policy</h2>
+        <p>If we ever change how the site works in a way that affects privacy, we'll update this page and bump the date at the top. There are no plans to add tracking or collection of any kind.</p>
+
+        <h2>9. Contact</h2>
+        <p>Questions about privacy? See the <a href="/contact">contact page</a>.</p>
+      </div>
+    </AppShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<PrivacyPage/>);
+</script>
+</body>
+</html>
